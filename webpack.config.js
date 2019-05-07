@@ -2,7 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.tsx",
   output: {
     publicPath: './',
     filename: 'bundle.js',
@@ -29,6 +29,12 @@ module.exports = {
     '@brightsign/networkdiagnostics': 'commonjs @brightsign/networkdiagnostics',
   },
   module: {
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
