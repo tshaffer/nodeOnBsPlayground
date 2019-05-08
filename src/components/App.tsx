@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
-export class App extends React.Component<any, object> {
+class App extends React.Component<any, object> {
 
   componentDidMount() {
     console.log("app.js::componentDidMount invoked");
