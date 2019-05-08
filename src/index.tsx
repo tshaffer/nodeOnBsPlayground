@@ -9,18 +9,18 @@ import { createStore, applyMiddleware } from 'redux';
 
 import reducers from './store/reducers';
 
-import App from './components/app';
+import App from './components/App';
 
 const store = createStore(
-    reducers,
-    applyMiddleware(
-        thunkMiddleware,
-    ),
+  reducers,
+  applyMiddleware(
+      thunkMiddleware,
+  ),
 );
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('content') as HTMLElement,
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('content') as HTMLElement,
 );
