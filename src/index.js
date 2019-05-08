@@ -16,20 +16,20 @@ import reducers from './store/reducers';
 
 import App from './components/App';
 
-var VideoModeConfigurationClass = require("@brightsign/videomodeconfiguration");
-var videoConfig = new VideoModeConfigurationClass();
+// var VideoModeConfigurationClass = require("@brightsign/videomodeconfiguration");
+// var videoConfig = new VideoModeConfigurationClass();
 
-videoConfig.getBestMode("hdmi").then(
-  function(data) {
-    console.log("getBestMode returned");
-    console.log(data);
-    act = document.getElementById('action')
-    act.style.color = "red"
-  })
-.catch(
-  function(data) {
-    console.log(JSON.stringify(data));
-  });
+// videoConfig.getBestMode("hdmi").then(
+//   function(data) {
+//     console.log("getBestMode returned");
+//     console.log(data);
+//     act = document.getElementById('action')
+//     act.style.color = "red"
+//   })
+// .catch(
+//   function(data) {
+//     console.log(JSON.stringify(data));
+//   });
 
 const store = createStore(
   reducers,
