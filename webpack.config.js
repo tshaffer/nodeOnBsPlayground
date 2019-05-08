@@ -2,17 +2,23 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.tsx",
   output: {
-    publicPath: './',
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    libraryTarget: "umd",
+    publicPath: './build/',
+    filename: "bundle.js",
+    path: __dirname + "/build"
   },
+
   devtool: "source-map",
-  watchOptions: {
-    poll: true
-  },
+
   target: 'electron',
+
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
+
   externals: {
     BSDeviceInfo : 'BSDeviceInfo',
     '@brightsign/registry': 'commonjs @brightsign/registry',
@@ -27,28 +33,15 @@ module.exports = {
 
     '@brightsign/hostconfiguration': 'commonjs @brightsign/hostconfiguration',
     '@brightsign/networkdiagnostics': 'commonjs @brightsign/networkdiagnostics',
+    'core-js/fn/object/assign' : 'commonjs core-js/fn/object/assign',
   },
+
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-            presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.json?$/,
-        loader: 'json'
-      },
-    ]
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+    ],
   },
-  plugins: [
-    new CopyWebpackPlugin([{
-      from: './artifacts/**/*',
-      to: '.',
-      flatten: true
-    }])
-  ]
 }
